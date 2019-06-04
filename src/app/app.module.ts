@@ -12,13 +12,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthExpiredInterceptor } from './interceptors/auth-expired.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HasRoleDirectiveDirective } from './directives/has-role-directive.directive';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HasRoleDirectiveDirective],
   entryComponents: [],
   imports: [
     BrowserModule,

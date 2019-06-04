@@ -28,13 +28,13 @@ export class AuthServerProvider {
       const bearerToken = resp.headers.get('Authorization');
       if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
         const jwt = bearerToken.slice(7, bearerToken.length);
-        this.storeAuthenticationToken(jwt, credentials.rememberMe);
+        this.storeAuthenticationToken(jwt, credentials.rememberMe, credentials);
         return jwt;
       }
     }
   }
 
-  loginWithToken(jwt, rememberMe) {
+  loginWithToken(jwt,rememberMe) {
     if (jwt) {
       this.storeAuthenticationToken(jwt, rememberMe);
       return Promise.resolve(jwt);
@@ -43,7 +43,7 @@ export class AuthServerProvider {
     }
   }
 
-  storeAuthenticationToken(jwt, rememberMe) {
+  storeAuthenticationToken(jwt, rememberMe, credentials?) {
     if (rememberMe) {
       this.$localStorage.store('authenticationToken', jwt);
     } else {

@@ -24,7 +24,7 @@ export class ApiService {
         reqOpts.params.set(k, params[k]);
       }
     }
-
+    
     return this.http.get(ApiService.API_URL + '/' + endpoint, reqOpts);
   }
 

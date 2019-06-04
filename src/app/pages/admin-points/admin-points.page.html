@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>adminPoints</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="save()">
+    <label for="userId">User</label>
+    <ion-select  [(ngModel)]="point.userId" name="userId" >
+      <ion-select-option *ngFor="let user of users" value="{{user.id}}">{{user.firstName}}</ion-select-option>
+    </ion-select>
+
+    <label for="categorie">Category</label>
+    <ion-select  [(ngModel)]="point.categorie" name="categorie">
+      <ion-select-option *ngFor="let cat of badges" value="{{cat}}">{{cat}}</ion-select-option>
+    </ion-select>
+
+    <label for="date">Date</label>
+    <ion-datetime display-format="DD/MMM/YYYY" [(ngModel)]="point.date" name="date" ></ion-datetime>
+
+    <label for="nbPoints">Points</label>
+    <ion-input type="number" [(ngModel)]="point.nbPoints" name="nbPoints" value="0" ></ion-input>
+
+    <ion-button type="submit">Envoyer</ion-button>
+  </form>
+</ion-content>

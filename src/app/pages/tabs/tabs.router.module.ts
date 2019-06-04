@@ -26,11 +26,20 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'account',
+        path: 'badges',
         children: [
           {
             path: '',
             loadChildren: '../account/account.module#AccountPageModule'
+          }
+        ]
+      },
+      {
+        path: 'admin',
+        children: [
+          {
+            path: '',
+            loadChildren: '../admin-points/admin-points.module#AdminPointsPageModule'
           }
         ]
       },

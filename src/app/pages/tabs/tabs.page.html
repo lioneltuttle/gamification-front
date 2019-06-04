@@ -15,12 +15,20 @@
       </ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="account">
+    <ion-tab-button tab="badges" (ionChanges)="selectBadges()" >
       <ion-icon name="send"></ion-icon>
       <ion-label>
-        {{ 'TAB3_TITLE' | translate }}
+        badges
       </ion-label>
     </ion-tab-button>
+    <div>
+      <ion-tab-button tab="admin">
+        <ion-icon name="construct"></ion-icon>
+        <ion-label>
+          admin
+        </ion-label>
+      </ion-tab-button>
+    </div>
   </ion-tab-bar>
 
 </ion-tabs>

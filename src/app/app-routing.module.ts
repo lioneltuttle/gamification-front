@@ -6,7 +6,10 @@ const routes: Routes = [
   { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
-  { path: 'accessdenied', redirectTo: '', pathMatch: 'full' }
+  { path: 'accessdenied', redirectTo: '', pathMatch: 'full' },
+  { path: 'badges',loadChildren: './pages/badges/badges.module#BadgesPageModule' },
+  { path: 'resultat', loadChildren: './pages/resultat/resultat.module#ResultatPageModule' },
+  { path: 'admin-points', loadChildren: './pages/admin-points/admin-points.module#AdminPointsPageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

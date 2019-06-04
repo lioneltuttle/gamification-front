@@ -33,6 +33,10 @@ export class UserService {
     return this.apiService.get('users');
   }
 
+  findAllUsers(): Observable<any> {
+    return this.apiService.get('usersROLEUser');
+  }
+
   /**
    * Send a POST request to our signup endpoint with the data
    * the user entered on the form.
