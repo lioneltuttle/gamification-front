@@ -23,9 +23,7 @@ export class BadgesPage implements OnInit {
 
   displayNewBadges() {
     this.pointsAuditService.getBadgesProUpdate().subscribe(
-      data => {
-        console.log(data);
-        
+      data => {        
         let pa = data as [any];
         for (let audit of pa) {
           this.toastUp(audit);
@@ -36,11 +34,10 @@ export class BadgesPage implements OnInit {
   }
 
   async toastUp(audit:any){
-    console.log("toast p");
     
     let toast = await this.toastController.create({
       message: audit.value,
-      duration: 2000
+      showCloseButton: true
     });
 
     toast.onDidDismiss().then(() => {
@@ -51,10 +48,7 @@ export class BadgesPage implements OnInit {
   }
 
   reloadBadges() {
-    console.log("reload");
-
     this.badgesService.getBadges().subscribe(data => {
-      console.log(data);
       this.badges = data as [Resultat];
     });
     this.displayNewBadges();

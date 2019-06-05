@@ -12,14 +12,13 @@ export class PointsAuditService {
 
   getBadgesProUpdate(): Observable<any> {
     if (this.accountService.isAuthenticated) {
-      console.log(this.accountService.getUserId());
-      
-      return this.apiService.get('points-audits-for/' + this.accountService.getUserId());
+         return this.apiService.get('points-audits-for/' + this.accountService.getUserId());
     }
   }
 
   updatePointAudit(point:any){
+    
     this.apiService.put('points-audits/', JSON.stringify( point), {
-      headers: { 'Content-Type': 'application/json' }});
+      headers: { 'Content-Type': 'application/json' }}).subscribe( );
   }
 }

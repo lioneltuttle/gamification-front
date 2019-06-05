@@ -17,15 +17,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'entities',
-        children: [
-          {
-            path: '',
-            loadChildren: '../entities/entities.module#EntitiesPageModule'
-          }
-        ]
-      },
-      {
         path: 'badges',
         children: [
           {

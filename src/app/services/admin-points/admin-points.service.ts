@@ -15,11 +15,10 @@ export class AdminPointsService {
   }
 
   save(point:Point){
-    console.log(point);
     
     this.apiService.post("points", JSON.stringify(point), {
       headers: { 'Content-Type': 'application/json' }
-    }).subscribe(data => console.log(data), error => console.log(error));
+    }).subscribe(data => {}, error => console.log(error));
   }
 
   findLast2Weeks(userId:number):Observable<any>{
