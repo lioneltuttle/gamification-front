@@ -9,7 +9,9 @@ const routes: Routes = [
   { path: 'accessdenied', redirectTo: '', pathMatch: 'full' },
   { path: 'badges',loadChildren: './pages/badges/badges.module#BadgesPageModule' },
   { path: 'resultat', loadChildren: './pages/resultat/resultat.module#ResultatPageModule' },
-  { path: 'admin-points', loadChildren: './pages/admin-points/admin-points.module#AdminPointsPageModule' }
+  { path: 'admin-points', loadChildren: './pages/admin-points/admin-points.module#AdminPointsPageModule' },
+  { path: 'badges-master', loadChildren: './pages/badges-master/badges-master.module#BadgesMasterPageModule' },
+  { path: 'badges-legend', loadChildren: './pages/badges-legend/badges-legend.module#BadgesLegendPageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
