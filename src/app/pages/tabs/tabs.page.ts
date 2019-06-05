@@ -13,6 +13,7 @@ export class TabsPage {
   }
 
   selectBadges(){
+    console.log("publis to badges selected");
     this.events.publish("badges Selected");
   }
 }

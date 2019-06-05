@@ -30,7 +30,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../account/account.module#AccountPageModule'
+            loadChildren: '../badges/badges.module#BadgesPageModule'
           }
         ]
       },

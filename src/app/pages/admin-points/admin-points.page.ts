@@ -24,29 +24,13 @@ export class AdminPointsPage implements OnInit {
     let curr = new Date(); // get current date
     this.point.date = new Date();
     this.point.date.setDate(curr.getDate() - curr.getDay()); // First day is the day of the month - the day of the week
-
   }
 
   keys(): Array<string> {
-    var keys = Object.keys(BadgeType);
-    console.log(keys);
-
-    return keys;
+    return Object.keys(BadgeType);
   }
 
   save() {
     this.adminPointsService.save(this.point);
   }
-
- /*  findFor(badgeType: BadgeType, which: number): number {
-    if (isUndefined(this.points))
-      return 0;
-
-    let toto = this.points.filter(p => p.categorie == badgeType)[which];
-    console.log(toto);
-    if (isUndefined(toto))
-      return -1;
-    return toto.nbPoints;
-  } */
-
 }
