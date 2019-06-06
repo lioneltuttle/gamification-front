@@ -32,6 +32,7 @@
     "@ionic/angular": "^4.1.0",
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
+    "cordova-plugin-ionic": "5.3.0",
     "core-js": "^2.5.4",
     "generator-jhipster-ionic": "^3.3.0",
     "ng-jhipster": "0.9.3",
@@ -83,6 +84,11 @@
       "cordova-plugin-camera": {
         "CAMERA_USAGE_DESCRIPTION": "Need camera access to take pictures",
         "PHOTOLIBRARY_USAGE_DESCRIPTION": "Need photo library access to get pictures from there"
+      },
+      "cordova-plugin-ionic": {
+        "APP_ID": "7e16fdcd",
+        "CHANNEL_NAME": "Production",
+        "UPDATE_METHOD": "background"
       }
     }
   },
