@@ -5,6 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
+    "heroku prebuild":"npm install",
     "start": "ng serve --prod",
     "build": "ng build --prod",
     "test": "jest",
