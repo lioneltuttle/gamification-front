@@ -5,9 +5,9 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "heroku prebuild":"npm install",
+    "heroku-prebuild":"npm install",
     "start": "ng serve --prod",
-    "build": "ng build --prod",
+    "build": "npm install && ng build --prod",
     "test": "jest",
     "lint": "ng lint",
     "e2e": "npm run e2e-update && npm run e2e-test",
