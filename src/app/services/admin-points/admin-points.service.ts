@@ -21,9 +21,4 @@ export class AdminPointsService {
     }).subscribe(data => {}, error => console.log(error));
   }
 
-  findLast2Weeks(userId:number):Observable<any>{
-    return this.apiService.post("AllPoints", JSON.stringify( userId), {
-      headers: { 'Content-Type': 'application/json' }
-    });
-  }
 }
