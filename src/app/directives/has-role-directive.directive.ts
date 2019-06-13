@@ -5,7 +5,7 @@ import { AccountService } from '../services/auth/account.service';
 @Directive({
   selector: '[appHasRole]'
 })
-export class HasRoleDirectiveDirective implements OnInit, OnDestroy  {
+export class HasRoleDirectiveDirective implements OnInit, OnDestroy {
 
   // the role the user must have 
   @Input('appHasRole') appHasRole: string;
@@ -26,31 +26,23 @@ export class HasRoleDirectiveDirective implements OnInit, OnDestroy  {
     private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<any>,
     private accountService: AccountService
-  ) {}
+  ) { }
 
   ngOnInit() {
 
-      // If the user has the role needed to 
-      // render this component we can add it
-      if (this.accountService.hasAuthority(this.appHasRole)) {
-        // If it is already visible (which can happen if
-        // his roles changed) we do not need to add it a second time
-        if (!this.isVisible) {
-          // We update the `isVisible` property and add the 
-          // templateRef to the view using the 
-          // 'createEmbeddedView' method of the viewContainerRef
+    this.accountService.hasAuthority(this.appHasRole).then(
+      b => {
+        if (!b) {
           this.isVisible = true;
           this.viewContainerRef.createEmbeddedView(this.templateRef);
+        } else {
+          this.isVisible = false;
+          this.viewContainerRef.clear();
         }
-      } else {
-        // If the user does not have the role, 
-        // we update the `isVisible` property and clear
-        // the contents of the viewContainerRef
-        this.isVisible = false;
-        this.viewContainerRef.clear();
       }
+    );
   }
-  
+
   // Clear the subscription on destroy
   ngOnDestroy() {
     this.stop$.next();
