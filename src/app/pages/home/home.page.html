@@ -16,21 +16,27 @@
   <div>THE GAME</div>
 
   <ion-list>
-    <ion-item button="true" (click)="presentProToMasterConfirm()" >
-      <ion-label><H2>{{nbBadgesPro}} Badges pro</H2></ion-label>
+    <ion-item button="true" (click)="presentProToMasterConfirm()">
+      <ion-label>
+        <H2>{{nbBadgesPro}} Badges pro</H2>
+      </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Il reste encore 0 Jours avant la raz des points</ion-label>
     </ion-item>
-    <ion-item button="true" (click)="presentMasterToLegendConfirm()" >
-      <img *ngFor="let i of nbBadgesMaster" src="assets/img/MASTER.png" />
+    <ion-item button="true" (click)="presentMasterToLegendConfirm()">
+      <ion-thumbnail *ngFor="let i of nbBadgesMaster">
+        <img src="assets/img/MASTER.png" />
+      </ion-thumbnail>
     </ion-item>
     <ion-item>
       <ion-label>Il reste encore 0 Jours avant la raz des badges master</ion-label>
     </ion-item>
 
-    <ion-item button="true" (click)="presentLegendToPresentConfirm()"  >
-      <img *ngFor="let i of nbBadgesLegend" src="assets/img/LEGEND.png" />
+    <ion-item button="true" (click)="presentLegendToPresentConfirm()">
+      <ion-thumbnail *ngFor="let i of nbBadgesLegend">
+        <img src="assets/img/LEGEND.png" />
+      </ion-thumbnail>
     </ion-item>
     <ion-item>
       <ion-label>Il reste encore 0 Jours avant la raz des badges legend</ion-label>

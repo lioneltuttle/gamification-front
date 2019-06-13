@@ -8,7 +8,7 @@ import { AccountService } from '../services/auth/account.service';
 export class HasRoleDirectiveDirective implements OnInit, OnDestroy  {
 
   // the role the user must have 
-  @Input() appHasRole: string;
+  @Input('appHasRole') appHasRole: string;
 
   stop$ = new Subject();
 

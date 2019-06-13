@@ -1,9 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { AlertController, Events } from '@ionic/angular';
 import { AccountService } from 'src/app/services/auth/account.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Account } from 'src/model/account.model';
 import { BadgesMgtService } from 'src/app/services/badgesMgt/badges-mgt.service';
+import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +14,17 @@ import { BadgesMgtService } from 'src/app/services/badgesMgt/badges-mgt.service'
 })
 export class HomePage implements OnInit {
   account: Account;
-  nbBadgesMaster: [number];
+  nbBadgesMaster: number[];
   nbBadgesLegend: number[];
   nbBadgesPro: number;
 
-  constructor(public navController: NavController, private accountService: AccountService,
-     private loginService: LoginService, private badgeMgt: BadgesMgtService, private alertController: AlertController,
-     private changeDetect:ChangeDetectorRef) { }
+  constructor(public router: Router, private accountService: AccountService,
+    private loginService: LoginService,
+    private badgeMgt: BadgesMgtService,
+    private alertController: AlertController,
+    private events: Events) {
+    events.subscribe("reload home", () => this.reloadPage());
+  }
 
   ngOnInit() {
     this.accountService.identity().then(account => {
@@ -29,9 +35,7 @@ export class HomePage implements OnInit {
       }
     });
 
-    this.countBadgesMaster();
-    this.countBadgesLegend();
-    this.countBadgesPro();
+    this.reloadPage();
   }
 
   isAuthenticated() {
@@ -44,48 +48,21 @@ export class HomePage implements OnInit {
   }
 
   private goBackToHomePage(): void {
-    this.navController.navigateBack('');
-  }
-
-  private countBadgesLegend() {
-    this.badgeMgt.getNbBadgesLegend().subscribe(
-      d => this.nbBadgesLegend = Array(d).fill(new ArrayBuffer(8)).map((x, i) => i)
-    );
-
-  }
-
-  private countBadgesMaster() {
-    this.badgeMgt.getNbBadgesMaster().subscribe(
-      d => this.nbBadgesMaster = Array(d).fill(0).map((x, i) => i) as [number]
-
-    );
-  }
-
-  private countBadgesPro() {
-    this.badgeMgt.getNbBadgesPro().subscribe(
-      d => this.nbBadgesPro = d
-    );
+    this.router.navigateByUrl('');
   }
 
   async presentProToMasterConfirm() {
     const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'sure',
+      message: 'Echanger 3 badges pro contre 1 master',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
+          cssClass: 'secondary'
         }, {
           text: 'Okay',
           handler: () => {
-            this.badgeMgt.exchangeForMaster();
-            this.countBadgesPro();
-            this.countBadgesMaster();
-            this.changeDetect.detectChanges();
+            this.badgeMgt.exchangeForMaster().subscribe(() => this.events.publish("reload home"));
           }
         }
       ]
@@ -97,23 +74,16 @@ export class HomePage implements OnInit {
 
   async presentMasterToLegendConfirm() {
     const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'Sur?',
+      message: 'Echanger 2 badges master contre 1 legend?',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
+          cssClass: 'secondary'
         }, {
           text: 'Okay',
           handler: () => {
-            this.badgeMgt.exchangeForLegend();
-            this.countBadgesMaster();
-            this.countBadgesLegend();
-            this.changeDetect.detectChanges();
+            this.badgeMgt.exchangeForLegend().subscribe(() => this.events.publish("reload home"));
           }
         }
       ]
@@ -132,16 +102,11 @@ export class HomePage implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
+          cssClass: 'secondary'
         }, {
           text: 'Okay',
           handler: () => {
-            this.badgeMgt.exchangeForPresent();
-            this.countBadgesLegend();
-            this.changeDetect.detectChanges();
+            this.badgeMgt.exchangeForPresent().subscribe(() => this.events.publish("reload home"));
           }
         }
       ]
@@ -150,5 +115,23 @@ export class HomePage implements OnInit {
     if (this.nbBadgesLegend.length >= 3) {
       await alert.present();
     }
+  }
+
+  ionViewWillEnter() {
+    this.reloadPage();
+  }
+
+  reloadPage() {
+    forkJoin(
+      this.badgeMgt.getNbBadgesPro(),
+      this.badgeMgt.getNbBadgesMaster(),
+      this.badgeMgt.getNbBadgesLegend()
+    ).subscribe(
+      ([pro, master, legend]) => {
+        this.nbBadgesPro = pro;
+        this.nbBadgesMaster = Array(master).fill(0).map((x, i) => i) ;
+        this.nbBadgesLegend = Array(legend).fill(0).map((x, i) => i) ;
+      }
+    )
   }
 }

@@ -28,24 +28,21 @@ export class BadgesMgtService {
     }
   }
 
-  exchangeForLegend() {
+  exchangeForLegend():Observable<any> {
     if (this.accountService.isAuthenticated) {
-      this.apiService.get('badge-masters/exchange/' + this.accountService.getUserId()).subscribe();
+      return this.apiService.get('badge-masters/exchange/' + this.accountService.getUserId());
     }
   }
 
-  exchangeForPresent() {
+  exchangeForPresent():Observable<any> {
     if (this.accountService.isAuthenticated) {
-      this.apiService.get('badge-legends/exchange/' + this.accountService.getUserId()).subscribe();
+      return this.apiService.get('badge-legends/exchange/' + this.accountService.getUserId());
     }
   }
 
-  exchangeForMaster() {
+  exchangeForMaster():Observable<any> {
     if (this.accountService.isAuthenticated) {
-      console.log("call exchange");
-      
-      this.apiService.get('badge-pro/exchange/' + this.accountService.getUserId()).subscribe(() => console.log("success")
-       );
+      return this.apiService.get('badge-pro/exchange/' + this.accountService.getUserId());
     }
   }
 }
