@@ -18,7 +18,7 @@ export class PointsAuditService {
 
   updatePointAudit(point:any){
     
-    this.apiService.put('points-audits-for/', JSON.stringify( point), {
+    this.apiService.put('points-audits/', JSON.stringify( point), {
       headers: { 'Content-Type': 'application/json' }}).subscribe( );
   }
 }

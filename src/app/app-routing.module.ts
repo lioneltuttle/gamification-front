@@ -8,10 +8,12 @@ const routes: Routes = [
   { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
   { path: 'accessdenied', redirectTo: '', pathMatch: 'full' },
   { path: 'badges',loadChildren: './pages/badges/badges.module#BadgesPageModule' },
-  { path: 'resultat', loadChildren: './pages/resultat/resultat.module#ResultatPageModule' },
   { path: 'admin-points', loadChildren: './pages/admin-points/admin-points.module#AdminPointsPageModule' },
   { path: 'badges-master', loadChildren: './pages/badges-master/badges-master.module#BadgesMasterPageModule' },
-  { path: 'badges-legend', loadChildren: './pages/badges-legend/badges-legend.module#BadgesLegendPageModule' }
+  { path: 'badges-legend', loadChildren: './pages/badges-legend/badges-legend.module#BadgesLegendPageModule' },
+  { path: 'recap', loadChildren: './pages/recap/recap.module#RecapPageModule' },
+  { path: 'resultat-semaine', loadChildren: './pages/resultat-semaine/resultat-semaine.module#ResultatSemainePageModule' },
+  { path: 'resultat-mois', loadChildren: './pages/resultat-mois/resultat-mois.module#ResultatMoisPageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

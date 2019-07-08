@@ -13,12 +13,14 @@ export class BadgesService {
 
   constructor(private apiService: ApiService, private accountService: AccountService) { }
 
-  getBadges(): Observable<any> {
-    if(this.accountService.isAuthenticated ){
-        return this.apiService.get('resultats/' + this.accountService.getUserId());
+  getBadges(userId?): Observable<any> {
+    let id;
+    if(userId){
+      id = userId.id;
+    } else if(this.accountService.isAuthenticated ){
+      id = this.accountService.getUserId();
     }
+    return this.apiService.get('resultats/' + id);
   }
 
-  OnInit() {
-  }
 }

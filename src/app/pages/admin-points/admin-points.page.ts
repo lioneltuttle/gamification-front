@@ -20,10 +20,6 @@ export class AdminPointsPage implements OnInit {
   ngOnInit() {
     this.badges = this.keys();
     this.userService.findAllUsers().subscribe(d => this.users = d);
-    //choose start of week
-    let curr = new Date(); // get current date
-    this.point.date = new Date();
-    this.point.date.setDate(curr.getDate() - curr.getDay()); // First day is the day of the month - the day of the week
   }
 
   keys(): Array<string> {
@@ -31,6 +27,20 @@ export class AdminPointsPage implements OnInit {
   }
 
   save() {
+    this.point.date = this.getLastFriday();
     this.adminPointsService.save(this.point);
+  }
+
+  getLastFriday(): Date {
+    var d = new Date(),
+      day = d.getDay(),
+      diff = (day <= 5) ? (7 - 5 + day) : (day - 5);
+
+    d.setDate(d.getDate() - diff);
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setSeconds(0);
+
+    return d;
   }
 }

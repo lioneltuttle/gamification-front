@@ -16,9 +16,6 @@
       <ion-select-option *ngFor="let cat of badges" value="{{cat}}">{{cat}}</ion-select-option>
     </ion-select>
 
-    <label for="date">Date</label>
-    <ion-datetime display-format="DD/MMM/YYYY" [(ngModel)]="point.date" name="date" ></ion-datetime>
-
     <label for="nbPoints">Points</label>
     <ion-input type="number" [(ngModel)]="point.nbPoints" name="nbPoints" value="0" ></ion-input>
 

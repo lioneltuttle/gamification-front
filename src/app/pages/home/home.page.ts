@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AlertController, Events } from '@ionic/angular';
 import { AccountService } from 'src/app/services/auth/account.service';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -10,7 +10,8 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  styleUrls: ['home.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePage implements OnInit {
   account: Account;
@@ -22,8 +23,8 @@ export class HomePage implements OnInit {
     private loginService: LoginService,
     private badgeMgt: BadgesMgtService,
     private alertController: AlertController,
-    private events: Events) {
-    events.subscribe("reload home", () => this.reloadPage());
+    private events: Events,
+    private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -62,7 +63,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.badgeMgt.exchangeForMaster().subscribe(() => this.events.publish("reload home"));
+            this.reloadPage();
           }
         }
       ]
@@ -83,7 +84,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.badgeMgt.exchangeForLegend().subscribe(() => this.events.publish("reload home"));
+            this.reloadPage();
           }
         }
       ]
@@ -106,7 +107,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.badgeMgt.exchangeForPresent().subscribe(() => this.events.publish("reload home"));
+            this.reloadPage();
           }
         }
       ]
@@ -129,8 +130,9 @@ export class HomePage implements OnInit {
     ).subscribe(
       ([pro, master, legend]) => {
         this.nbBadgesPro = pro;
-        this.nbBadgesMaster = Array(master).fill(0).map((x, i) => i) ;
-        this.nbBadgesLegend = Array(legend).fill(0).map((x, i) => i) ;
+        this.nbBadgesMaster = Array(master).map((x, i) => 0) ;
+        this.nbBadgesLegend = Array(legend).map((x, i) => 0) ;
+        this.cdr.markForCheck();
       }
     )
   }
