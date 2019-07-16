@@ -35,6 +35,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'recap',
+        children: [
+          {
+            path: '',
+            loadChildren: '../recap/recap.module#RecapPageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

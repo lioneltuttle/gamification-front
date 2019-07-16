@@ -9,15 +9,26 @@ import { AccountService } from 'src/app/services/auth/account.service';
 })
 export class TabsPage implements OnInit{
 
+  tabAdmin: any;
+  tabrecap: any;
   constructor(public events: Events,
     private accountService: AccountService) {
-    
+     
   }
 
   ngOnInit(){
-    const tabBar = document.getElementById('tabadmin');
+    this.tabAdmin = document.getElementById('tabadmin');
+    this.tabrecap = document.getElementById('tabrecap');
+  }
+
+  ionViewWillEnter() {
     this.accountService.hasAuthority("ROLE_ADMIN").then( 
-      b => {if(!b)tabBar.style.display = 'none'} ); 
+      b => {
+        if(!b){
+          this.tabAdmin.style.display = 'none';
+          this.tabrecap.style.display = 'none';
+        }
+      } ); 
   }
 
   selectBadges(){
