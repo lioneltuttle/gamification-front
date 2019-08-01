@@ -160,3 +160,7 @@ Apache-2.0 © [Okta](https://developer.okta.com/)
 
 [travis-image]: https://travis-ci.org/oktadeveloper/ionic-jhipster-starter.svg?branch=master
 [travis-url]: https://travis-ci.org/oktadeveloper/ionic-jhipster-starter
+
+
+##### creation apk
+ionic cordova build --release --prod android

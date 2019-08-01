@@ -63,7 +63,8 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.reloadPage();
+            this.badgeMgt.exchangeForMaster().subscribe( () => this.reloadPage());
+            
           }
         }
       ]
@@ -84,7 +85,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.reloadPage();
+            this.badgeMgt.exchangeForLegend().subscribe( () => this.reloadPage());
           }
         }
       ]
@@ -107,7 +108,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.reloadPage();
+            this.badgeMgt.exchangeForPresent().subscribe( () => this.reloadPage());
           }
         }
       ]
@@ -130,8 +131,8 @@ export class HomePage implements OnInit {
     ).subscribe(
       ([pro, master, legend]) => {
         this.nbBadgesPro = pro;
-        this.nbBadgesMaster = Array(master).map((x, i) => 0) ;
-        this.nbBadgesLegend = Array(legend).map((x, i) => 0) ;
+        this.nbBadgesMaster = Array(master).fill(0).map((x, i) => i) ;
+        this.nbBadgesLegend = Array(legend).fill(0).map((x, i) => i) ;
         this.cdr.markForCheck();
       }
     )

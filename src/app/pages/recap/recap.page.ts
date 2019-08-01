@@ -14,17 +14,26 @@ export class RecapPage implements OnInit {
 
   badges: Array<string>;
   users: any[];
-  tab:any[][];
+  tab:any[];
 
   constructor(private adminPointsService: AdminPointsService, private userService: UserService, private badgesService:BadgesService) { }
 
   ngOnInit() {
     this.badges = Object.keys(BadgeType);
-    this.userService.findAllUsers().pipe(
-      concatMap(user => {
-        this.users = user;
-        return this.badgesService.getBadges(user.id);
-      })
-    ).subscribe(d => this.tab[d.userid][d]);
+    this.badgesService.getFullRecap().subscribe( 
+      data => {console.log(data); this.tab = data;
+        console.log(this.tab[0].badgesPro);
+        console.log(this.tab[0].badgesPro['R2']);
+      } 
+      );
+    
+  }
+
+  displayValueOrZero(tableau , col){
+    if(typeof tableau[col] !== "undefined"){ 
+      return tableau[col] ;
+    } else {
+      return '0';
+    }
   }
 }

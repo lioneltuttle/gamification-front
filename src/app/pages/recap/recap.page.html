@@ -6,11 +6,20 @@
 
 <ion-content>
 <ion-grid>
-  <ion-row>
-    <ion-col>Nom</ion-col>
-    <ion-col *ngFor="let col of badges" >{{col}}</ion-col>
-    <ion-col>Master</ion-col>
-    <ion-col>Legend</ion-col>
+  <ion-row nowrap >
+    <ion-col class="col" >Nom</ion-col>
+    <ion-col *ngFor="let col of badges" class="col" >{{col}}</ion-col>
+    <ion-col class="col" >Master</ion-col>
+    <ion-col class="col" >Legend</ion-col>
+    <ion-col class="col" >cadeau</ion-col>
+  </ion-row>
+  <ion-row *ngFor="let ligne of tab" >
+    <ion-col class="col" ><a  >{{ligne.user.firstName}}</a></ion-col>
+    <ion-col *ngFor="let col of badges" class="col" >{{ displayValueOrZero(ligne.badgesPro, col)   }}</ion-col>
+    <ion-col class="col" >{{ligne.badgeMaster}}</ion-col>
+    <ion-col class="col" >{{ligne.badgeLegend}}</ion-col>
+    <ion-col class="col" >{{ligne.shouldReceivePresent}}</ion-col>
   </ion-row>
 </ion-grid>
+
 </ion-content>

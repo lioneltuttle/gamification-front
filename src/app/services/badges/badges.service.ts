@@ -23,4 +23,9 @@ export class BadgesService {
     return this.apiService.get('resultats/' + id);
   }
 
+  getFullRecap():Observable<any> {
+    return this.apiService.get('recap-service/get-full-recap/');
+  }
+  
+
 }
