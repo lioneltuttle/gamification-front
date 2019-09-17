@@ -43,6 +43,34 @@ const routes: Routes = [
           }
         ]
       },
+
+      {
+        path: 'recap-perso/:id',
+        children: [
+          {
+            path: '',
+            loadChildren: '../recap/recap.module#RecapPageModule'
+          }
+        ]
+      },
+      {
+        path: 'resultat-mois',
+        children: [
+          {
+            path: '',
+            loadChildren: '../resultat-mois/resultat-mois.module#ResultatMoisPageModule'
+          }
+        ]
+      },
+      {
+        path: 'resultat-semaine',
+        children: [
+          {
+            path: '',
+            loadChildren: '../resultat-semaine/resultat-semaine.module#ResultatSemainePageModule'
+          }
+        ]
+      },
       {
         path: '',
         redirectTo: '/tabs/home',
