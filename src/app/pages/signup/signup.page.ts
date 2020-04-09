@@ -49,8 +49,6 @@ export class SignupPage implements OnInit {
   ngOnInit() {}
 
   doSignup() {
-    // set login to same as email
-    this.account.login = this.account.email;
     // Attempt to login in through our User service
     this.userService.signup(this.account).subscribe(
       async () => {
