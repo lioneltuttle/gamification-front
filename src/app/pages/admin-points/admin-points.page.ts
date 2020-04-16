@@ -1,8 +1,9 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AdminPointsService } from 'src/app/services/admin-points/admin-points.service';
 import { Point } from 'src/app/model/Point';
 import { UserService } from 'src/app/services/user/user.service';
 import { BadgeType } from 'src/app/model/Resultat';
+import { UploadFileService } from 'src/app/services/uploadFile/uploadFile.service';
 
 @Component({
   selector: 'app-admin-points',
@@ -14,8 +15,10 @@ export class AdminPointsPage implements OnInit {
   users: [any];
   point: Point = new Point();
   badges: Array<string>;
-
-  constructor(private adminPointsService: AdminPointsService, private userService: UserService) { }
+  
+  @ViewChild('fileInput')
+  myInputVariable: ElementRef;
+  constructor(private adminPointsService: AdminPointsService, private userService: UserService, private uploadFileService:UploadFileService) { }
 
   ngOnInit() {
     this.badges = this.keys();
@@ -42,5 +45,15 @@ export class AdminPointsPage implements OnInit {
     d.setSeconds(0);
 
     return d;
+  }
+
+  openFile(){
+    this.myInputVariable.nativeElement.click();
+  }
+
+  importExcel(files:FileList){
+    this.uploadFileService.postFile(files.item(0));
+    //reset file input
+    this.myInputVariable.nativeElement.value = "";
   }
 }
