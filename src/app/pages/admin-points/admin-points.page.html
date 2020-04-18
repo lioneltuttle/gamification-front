@@ -20,5 +20,10 @@
     <ion-input type="number" [(ngModel)]="point.nbPoints" name="nbPoints" value="0" ></ion-input>
 
     <ion-button type="submit">Envoyer</ion-button>
+    
+    <ion-button (click)="openFile()">Import Excel
+      <input #fileInput type="file" style="display:none;" (change)="importExcel($event.target.files)"
+      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+    </ion-button>
   </form>
 </ion-content>
