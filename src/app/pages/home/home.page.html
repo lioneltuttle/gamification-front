@@ -22,7 +22,7 @@
       </ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Il reste encore {{restDayofMonth}} Jours avant la raz des points</ion-label>
+      <ion-label>Il reste encore <span [ngStyle]="{'color': restDayofMonth < 10 ? 'red' : 'inherit'}">{{restDayofMonth}} Jours</span> avant la raz des points</ion-label>
     </ion-item>
     <ion-item button="true" (click)="presentMasterToLegendConfirm()">
       <ion-thumbnail *ngFor="let i of nbBadgesMaster">
@@ -30,7 +30,7 @@
       </ion-thumbnail>
     </ion-item>
     <ion-item>
-      <ion-label>Il reste encore {{restDayofQuarter}} Jours avant la raz des badges master</ion-label>
+      <ion-label>Il reste encore <span [ngStyle]="{'color': restDayofQuarter < 10 ? 'red' : 'inherit'}">{{restDayofQuarter}} Jours</span> avant la raz des badges master</ion-label>
     </ion-item>
 
     <ion-item button="true" (click)="presentLegendToPresentConfirm()">
@@ -39,7 +39,7 @@
       </ion-thumbnail>
     </ion-item>
     <ion-item>
-      <ion-label>Il reste encore {{restDayofYear}} Jours avant la raz des badges legend</ion-label>
+      <ion-label>Il reste encore <span [ngStyle]="{'color': restDayofYear < 10 ? 'red' : 'inherit'}">{{restDayofYear}} Jours</span> avant la raz des badges legend</ion-label>
     </ion-item>
 
   </ion-list>
