@@ -75,7 +75,16 @@ const routes: Routes = [
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
-      }
+      },
+      {
+        path: 'history',
+        children: [
+          {
+            path: '',
+            loadChildren: '../history/history.module#HistoryPageModule'
+          }
+        ]
+      },
     ]
   },
   {

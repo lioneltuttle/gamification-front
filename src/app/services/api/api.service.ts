@@ -21,10 +21,10 @@ export class ApiService {
     if (params) {
       reqOpts.params = new HttpParams();
       for (let k in params) {
-        reqOpts.params.set(k, params[k]);
+        reqOpts.params = reqOpts.params.append(k, params[k]);
       }
     }
-    
+
     return this.http.get(ApiService.API_URL + '/' + endpoint, reqOpts);
   }
 

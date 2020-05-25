@@ -21,4 +21,18 @@ export class PointsAuditService {
     this.apiService.put('points-audits/', JSON.stringify( point), {
       headers: { 'Content-Type': 'application/json' }}).subscribe( );
   }
+
+  loadPointHistory(userId?: Number, begin?: Date, end?: Date): Observable<any> {
+    let id;
+    if (userId) {
+      id = userId;
+    } else if (this.accountService.isAuthenticated) {
+      id = this.accountService.getUserId();
+    }
+    let beginDate = begin ? begin : new Date(0);
+    let endDate = end ? end : new Date();
+
+    let params = { userId: id, begin: beginDate.toISOString(), end: endDate.toISOString() }
+    return this.apiService.get('pointsByPeriod', params);
+  }
 }
