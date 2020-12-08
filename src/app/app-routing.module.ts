@@ -13,7 +13,9 @@ const routes: Routes = [
   { path: 'badges-legend', loadChildren: './pages/badges-legend/badges-legend.module#BadgesLegendPageModule' },
   { path: 'recap', loadChildren: './pages/recap/recap.module#RecapPageModule' },
   { path: 'resultat-semaine', loadChildren: './pages/resultat-semaine/resultat-semaine.module#ResultatSemainePageModule' },
-  { path: 'resultat-mois', loadChildren: './pages/resultat-mois/resultat-mois.module#ResultatMoisPageModule' }
+  { path: 'resultat-mois', loadChildren: './pages/resultat-mois/resultat-mois.module#ResultatMoisPageModule' },
+  { path: 'history', loadChildren: './pages/history/history.module#HistoryPageModule' }
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

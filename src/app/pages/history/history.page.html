@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>history</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group *ngFor="let points of pointsList" color="none" id="point-list-item">
+    <ion-item-divider>
+      <ion-label><h2>{{points[0]}}</h2></ion-label>
+    </ion-item-divider>
+
+    <ion-item *ngFor="let point of points[1]" color="none">
+      <ion-thumbnail slot="start">
+        <img src="assets/img/{{point.categorie}}.png" />
+      </ion-thumbnail>
+      <ion-label>
+        <P>{{point.nbPoints}} points</P>
+      </ion-label>
+    </ion-item>
+
+  </ion-item-group>
+</ion-content>

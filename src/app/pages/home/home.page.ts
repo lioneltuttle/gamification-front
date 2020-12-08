@@ -6,6 +6,7 @@ import { Account } from 'src/model/account.model';
 import { BadgesMgtService } from 'src/app/services/badgesMgt/badges-mgt.service';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,9 @@ export class HomePage implements OnInit {
   nbBadgesMaster: number[];
   nbBadgesLegend: number[];
   nbBadgesPro: number;
+  restDayofMonth: number;
+  restDayofQuarter: number;
+  restDayofYear: number;
 
   constructor(public router: Router, private accountService: AccountService,
     private loginService: LoginService,
@@ -134,7 +138,15 @@ export class HomePage implements OnInit {
         this.nbBadgesMaster = Array(master).fill(0).map((x, i) => i) ;
         this.nbBadgesLegend = Array(legend).fill(0).map((x, i) => i) ;
         this.cdr.markForCheck();
+        this.restDayofMonth = this.restDay('month');
+        this.restDayofQuarter = this.restDay('quarter');
+        this.restDayofYear = this.restDay('year');
       }
     )
   }
+
+  private restDay(type : moment.unitOfTime.StartOf ) : number{
+  let endOfPeriod = moment().endOf(type);
+  return Math.abs(moment().diff(endOfPeriod, 'days'));
+}
 }
