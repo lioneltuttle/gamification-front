@@ -15,7 +15,7 @@
   </ion-row>
   <ion-row *ngFor="let ligne of tab" >
     <ion-col class="col" ><a href="/recap-perso/{{ligne.user.id}}" >{{ligne.user.firstName}}</a></ion-col>
-    <ion-col *ngFor="let col of badges" class="col" >{{ displayValueOrZero(ligne.badgesPro, col)   }}</ion-col>
+    <ion-col *ngFor="let col of badges" class="col" >{{ displayValueOrZero(ligne.badgesPro, col)   }} badge(s) pro;<br/> {{displayValueOrZero(ligne.points, col)}} points</ion-col>
     <ion-col class="col" >{{ligne.badgeMaster}}</ion-col>
     <ion-col class="col" >{{ligne.badgeLegend}}</ion-col>
     <ion-col class="col" >{{ligne.shouldReceivePresent}}</ion-col>

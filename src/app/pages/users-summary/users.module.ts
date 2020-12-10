@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
+import { RouterModule, Routes } from '@angular/router';
 
-import { RecapPage } from './recap.page';
+import { TranslateModule } from '@ngx-translate/core';
 import { UserRouteAccessService } from 'src/app/services/auth/user-route-access.service';
+
+import { UsersSummary } from './users.page';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: RecapPage,
+    component: UsersSummary,
     data: {
       authorities: ['ROLE_ADMIN']
     },
@@ -22,11 +23,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    IonicModule,
     CommonModule,
     FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule
   ],
-  declarations: [RecapPage]
+  declarations: [UsersSummary]
 })
-export class RecapPageModule {}
+export class UsersSummaryModule { }

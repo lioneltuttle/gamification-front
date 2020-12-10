@@ -85,6 +85,15 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'users',
+        children: [
+          {
+            path: '',
+            loadChildren: '../users-summary/users.module#UsersSummaryModule'
+          }
+        ]
+      },
     ]
   },
   {
