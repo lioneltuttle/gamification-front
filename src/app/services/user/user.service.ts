@@ -29,6 +29,11 @@ export class UserService {
       });
   }
 
+  setAdmin(userId: any) : Observable<any>{
+    return this.apiService.post('setadmin', userId)//.toPromise().then(data => console.log("user updated"))
+    ;
+  }
+
   findAll(): Observable<any> {
     return this.apiService.get('users');
   }

@@ -1,12 +1,13 @@
 <ion-header>
-  <ion-toolbar>
+
+
     <ion-title>recap</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-grid>
-  <ion-row nowrap >
+<ion-grid  >
+  <ion-row  >
+    <ion-col class="col" >Role</ion-col>
     <ion-col class="col" >Nom</ion-col>
     <ion-col *ngFor="let col of badges" class="col" >{{col}}</ion-col>
     <ion-col class="col" >Master</ion-col>
@@ -14,11 +15,24 @@
     <ion-col class="col" >cadeau</ion-col>
   </ion-row>
   <ion-row *ngFor="let ligne of tab" >
-    <ion-col class="col" ><a href="/recap-perso/{{ligne.user.id}}" >{{ligne.user.firstName}}</a></ion-col>
-    <ion-col *ngFor="let col of badges" class="col" >{{ displayValueOrZero(ligne.badgesPro, col)   }} badge(s) pro;<br/> {{displayValueOrZero(ligne.points, col)}} points</ion-col>
-    <ion-col class="col" >{{ligne.badgeMaster}}</ion-col>
-    <ion-col class="col" >{{ligne.badgeLegend}}</ion-col>
-    <ion-col class="col" >{{ligne.shouldReceivePresent}}</ion-col>
+    <ion-col class="col-content" >{{ligne.user.authorities}}</ion-col>
+
+    <ion-col class="col-content" >
+      
+    <ion-toolbar> 
+     <a href="/recap-perso/{{ligne.user.id}}"   >{{ligne.user.firstName}} {{ligne.user.lastName}}</a>
+    <ion-buttons slot="end">
+     
+            <ionic-context-menu >
+              <ionic-context-menu-item icon="star-half" (click)="setAdmin(ligne.user.id)">Switch administrator role</ionic-context-menu-item>
+            </ionic-context-menu>
+          </ion-buttons>
+         </ion-toolbar> 
+     </ion-col>
+    <ion-col *ngFor="let col of badges" class="col-content" >{{ displayValueOrZero(ligne.badgesPro, col)   }} badge(s) pro;<br/> {{displayValueOrZero(ligne.points, col)}} points</ion-col>
+    <ion-col class="col-content" >{{ligne.badgeMaster}}</ion-col>
+    <ion-col class="col-content" >{{ligne.badgeLegend}}</ion-col>
+    <ion-col class="col-content" >{{ligne.shouldReceivePresent}}</ion-col>
   </ion-row>
 </ion-grid>
 

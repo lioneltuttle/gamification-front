@@ -1,7 +1,17 @@
 .col{
-    background: gray;
-    border: thin solid black;
-    size: 80ch;
+    background: rgb(245, 236, 236);
+    border: inset ; 
+    size: 180ch;
     overflow: hidden;
     white-space:normal;
     }
+
+
+.col-content{
+    
+    border: inset ; 
+    size: 180ch;
+    overflow: hidden;
+    white-space:normal;
+    }
+

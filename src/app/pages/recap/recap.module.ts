@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { IonicContextMenuModule } from 'ionic-context-menu';
 
 import { RecapPage } from './recap.page';
 import { UserRouteAccessService } from 'src/app/services/auth/user-route-access.service';
@@ -25,6 +26,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    IonicContextMenuModule,
     RouterModule.forChild(routes)
   ],
   declarations: [RecapPage]

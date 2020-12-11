@@ -29,6 +29,14 @@ export class RecapPage implements OnInit {
     
   }
 
+  setAdmin(userId) {
+    this.userService.setAdmin(userId).subscribe(
+      data => {
+        location.reload() ;
+      }
+    );
+  }
+
   displayValueOrZero(tableau , col){
     if(typeof tableau[col] !== "undefined"){ 
       return tableau[col] ;
