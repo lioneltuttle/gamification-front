@@ -54,6 +54,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'history/:id',
+        children: [
+          {
+            path: '/:id',
+            loadChildren: '../history/history.module#HistoryPageModule'
+          }
+        ]
+      },
+      {
         path: 'resultat-mois',
         children: [
           {
@@ -82,6 +91,15 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../history/history.module#HistoryPageModule'
+          }
+        ]
+      },
+      {
+        path: 'users',
+        children: [
+          {
+            path: '',
+            loadChildren: '../users-summary/users.module#UsersSummaryModule'
           }
         ]
       },

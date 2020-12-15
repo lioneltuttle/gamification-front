@@ -29,6 +29,26 @@ export class UserService {
       });
   }
 
+  setAdmin(userId: any) : Observable<any>{
+    return this.apiService.post('setadmin', userId)
+    ;
+  }
+
+  removeUserRole(userId: any) : Observable<any>{
+    return this.apiService.post('removeUserRole', userId)
+    ;
+  }
+
+  deleteUser(login: any) : Observable<any>{
+    return this.apiService.delete('users/'+login)
+    ;
+  }
+
+  addUserRole(userId: any) : Observable<any>{
+    return this.apiService.post('addUserRole', userId)
+    ;
+  }
+
   findAll(): Observable<any> {
     return this.apiService.get('users');
   }

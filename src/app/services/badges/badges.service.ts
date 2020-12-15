@@ -15,17 +15,25 @@ export class BadgesService {
 
   getBadges(userId?): Observable<any> {
     let id;
-    if(userId){
+    if (userId) {
       id = userId.id;
-    } else if(this.accountService.isAuthenticated ){
+    } else if (this.accountService.isAuthenticated) {
       id = this.accountService.getUserId();
     }
     return this.apiService.get('resultats/' + id);
   }
 
-  getFullRecap():Observable<any> {
+  getFullRecap(): Observable<any> {
     return this.apiService.get('recap-service/get-full-recap/');
   }
-  
+
+  getInactiveRecap(): Observable<any> {
+    return this.apiService.get('recap-service/get-inactive-recap/');
+  }
+
+  getAdminRecap(): Observable<any> {
+    return this.apiService.get('recap-service/get-admin-recap/');
+  }
+
 
 }

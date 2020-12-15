@@ -7,11 +7,17 @@ import { IonicModule } from '@ionic/angular';
 
 import { AdminPointsPage } from './admin-points.page';
 import { UserService } from 'src/app/services/user/user.service';
+import { UserRouteAccessService } from 'src/app/services/auth/user-route-access.service';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminPointsPage
+    component: AdminPointsPage,
+    data: {
+      authorities: ['ROLE_ADMIN']
+    },
+    canActivate: [UserRouteAccessService]
   }
 ];
 

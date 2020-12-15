@@ -33,6 +33,18 @@ export class PointsAuditService {
     let endDate = end ? end : new Date();
 
     let params = { userId: id, begin: beginDate.toISOString(), end: endDate.toISOString() }
+    return this.apiService.get('pointsByUserAndPeriod', params);
+  }
+
+
+  loadUserSummary( begin?: Date, end?: Date):  Observable<any> {
+    let id;
+    
+    let beginDate = begin ? begin : new Date(0);
+    let endDate = end ? end : new Date();
+
+    let params = { begin: beginDate.toISOString(), end: endDate.toISOString() }
     return this.apiService.get('pointsByPeriod', params);
   }
+
 }
