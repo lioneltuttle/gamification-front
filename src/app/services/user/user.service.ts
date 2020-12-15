@@ -30,7 +30,22 @@ export class UserService {
   }
 
   setAdmin(userId: any) : Observable<any>{
-    return this.apiService.post('setadmin', userId)//.toPromise().then(data => console.log("user updated"))
+    return this.apiService.post('setadmin', userId)
+    ;
+  }
+
+  removeUserRole(userId: any) : Observable<any>{
+    return this.apiService.post('removeUserRole', userId)
+    ;
+  }
+
+  deleteUser(login: any) : Observable<any>{
+    return this.apiService.delete('users/'+login)
+    ;
+  }
+
+  addUserRole(userId: any) : Observable<any>{
+    return this.apiService.post('addUserRole', userId)
     ;
   }
 
