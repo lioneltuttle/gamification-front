@@ -22,7 +22,11 @@ export class AuthServerProvider {
       rememberMe: credentials.rememberMe
     };
 
-    return this.http.post(ApiService.API_URL + '/authenticate', data, { observe: 'response' }).pipe(map(authenticateSuccess.bind(this)));
+    return this.http.post(ApiService.API_URL + '/authenticate', data, {
+      observe: 'response'/*,
+      headers: {'Access-Control-Allow-Origin': 'Content-Type'} */
+  }
+  ).pipe(map(authenticateSuccess.bind(this)));
 
     function authenticateSuccess(resp) {
       const bearerToken = resp.headers.get('Authorization');
