@@ -62,7 +62,7 @@ export class UserService {
    * the user entered on the form.
    */
   signup(accountInfo: any) {
-    return this.apiService.post('register', accountInfo, { responseType: 'text' as 'text' }).pipe(share());
+    return this.apiService.post('register', accountInfo, { responseType: 'json' as 'json' }).pipe(share());
   }
 
   /**
