@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "350516941309",
+    "project_id": "gamification-2afd9",
+    "storage_bucket": "gamification-2afd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350516941309:android:ac2177e749f742261d4994",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350516941309-29umsqficmh2koc26vdjfv058r2lbo7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6M05Zwh0TtW_9J_uKwBFsuNPdNCuE1jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350516941309-29umsqficmh2koc26vdjfv058r2lbo7o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

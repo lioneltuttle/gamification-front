@@ -7,6 +7,7 @@ import { BadgesMgtService } from 'src/app/services/badgesMgt/badges-mgt.service'
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import * as moment from 'moment';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomePage implements OnInit {
     private badgeMgt: BadgesMgtService,
     private alertController: AlertController,
     private events: Events,
+    private oneSignal: OneSignal,
     private cdr: ChangeDetectorRef) {
   }
 
@@ -37,9 +39,10 @@ export class HomePage implements OnInit {
         this.goBackToHomePage();
       } else {
         this.account = account;
+        this.configureNotifications();
+
       }
     });
-
     this.reloadPage();
   }
 
@@ -50,6 +53,7 @@ export class HomePage implements OnInit {
   logout() {
     this.loginService.logout();
     this.goBackToHomePage();
+   // this.oneSignal.removeExternalUserId();
   }
 
   private goBackToHomePage(): void {
@@ -67,8 +71,8 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.badgeMgt.exchangeForMaster().subscribe( () => this.reloadPage());
-            
+            this.badgeMgt.exchangeForMaster().subscribe(() => this.reloadPage());
+
           }
         }
       ]
@@ -89,7 +93,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.badgeMgt.exchangeForLegend().subscribe( () => this.reloadPage());
+            this.badgeMgt.exchangeForLegend().subscribe(() => this.reloadPage());
           }
         }
       ]
@@ -112,7 +116,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
-            this.badgeMgt.exchangeForPresent().subscribe( () => this.reloadPage());
+            this.badgeMgt.exchangeForPresent().subscribe(() => this.reloadPage());
           }
         }
       ]
@@ -125,6 +129,33 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this.reloadPage();
+    this.configureNotifications();
+  }
+
+  configureNotifications() {
+
+    const externalUserId = this.accountService.getUserId(); // You will supply the external user id to the OneSignal SDK
+
+    // Setting External User Id with Callback Available in SDK Version 2.9.0+
+    this.oneSignal.setExternalUserId(externalUserId/*, (results) => {
+      // The results will contain push and email success statuses
+      console.log('Results of setting external user id');
+      console.log(results);
+
+      // Push can be expected in almost every situation with a success status, but
+      // as a pre-caution its good to verify it exists
+      if (results.push && results.push.success) {
+        console.log('Results of setting external user id push status:');
+        console.log(results.push.success);
+      }
+
+      // Verify the email is set or check that the results have an email success status
+      if (results.email && results.email.success) {
+        console.log('Results of setting external user id email status:');
+        console.log(results.email.success);
+      }
+    }*/);
+
   }
 
   reloadPage() {
@@ -135,8 +166,8 @@ export class HomePage implements OnInit {
     ).subscribe(
       ([pro, master, legend]) => {
         this.nbBadgesPro = pro;
-        this.nbBadgesMaster = Array(master).fill(0).map((x, i) => i) ;
-        this.nbBadgesLegend = Array(legend).fill(0).map((x, i) => i) ;
+        this.nbBadgesMaster = Array(master).fill(0).map((x, i) => i);
+        this.nbBadgesLegend = Array(legend).fill(0).map((x, i) => i);
         this.cdr.markForCheck();
         this.restDayofMonth = this.restDay('month');
         this.restDayofQuarter = this.restDay('quarter');
@@ -145,8 +176,8 @@ export class HomePage implements OnInit {
     )
   }
 
-  private restDay(type : moment.unitOfTime.StartOf ) : number{
-  let endOfPeriod = moment().endOf(type);
-  return Math.abs(moment().diff(endOfPeriod, 'days'));
-}
+  private restDay(type: moment.unitOfTime.StartOf): number {
+    let endOfPeriod = moment().endOf(type);
+    return Math.abs(moment().diff(endOfPeriod, 'days'));
+  }
 }

@@ -10,7 +10,8 @@ import { PointsAuditService } from 'src/app/services/points-audit/points-audit.s
 import { zip, of, from } from 'rxjs';
 import { groupBy, mergeMap, toArray, switchMap } from 'rxjs/operators';
 import { UploadFileService } from 'src/app/services/uploadFile/uploadFile.service';
-
+import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+// import { FCM } from '@ionic-native/fcm';
 
 
 @Component({
@@ -35,7 +36,10 @@ export class RecapPage implements OnInit {
     private badgesService: BadgesService,
     public atrCtrl: AlertController,
     private pointsAuditService: PointsAuditService,
-    private uploadFileService: UploadFileService) { }
+    private uploadFileService: UploadFileService,
+    private push: Push// ,
+    // private fcm: FCM
+   ) { }
 
   ngOnInit() {
     this.badges = Object.keys(BadgeType);
@@ -131,7 +135,6 @@ export class RecapPage implements OnInit {
       }
     );
   }
-
 
   async showPromptAlert(userid, badgetype, coef) {
     const alert = this.atrCtrl.create({

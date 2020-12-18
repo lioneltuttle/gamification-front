@@ -8,6 +8,7 @@ import { IonicContextMenuModule } from 'ionic-context-menu';
 
 import { RecapPage } from './recap.page';
 import { UserRouteAccessService } from 'src/app/services/auth/user-route-access.service';
+import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
     IonicContextMenuModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [RecapPage]
+  declarations: [RecapPage],
+  providers: [Push]
 })
 export class RecapPageModule {}
