@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AlertController, Events } from '@ionic/angular';
+import { AlertController} from '@ionic/angular';
 import { AccountService } from 'src/app/services/auth/account.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Account } from 'src/model/account.model';
@@ -24,11 +24,11 @@ export class HomePage implements OnInit {
   restDayofQuarter: number;
   restDayofYear: number;
 
-  constructor(public router: Router, private accountService: AccountService,
+  constructor(
+    public router: Router, private accountService: AccountService,
     private loginService: LoginService,
     private badgeMgt: BadgesMgtService,
     private alertController: AlertController,
-    private events: Events,
     private oneSignal: OneSignal,
     private cdr: ChangeDetectorRef) {
   }
@@ -107,7 +107,7 @@ export class HomePage implements OnInit {
   async presentLegendToPresentConfirm() {
     const alert = await this.alertController.create({
       header: 'Confirm!',
-      message: 'T sure que tu veux ton cadeau??',
+      message: 'Demander une récompense?',
       buttons: [
         {
           text: 'Cancel',
@@ -173,7 +173,7 @@ export class HomePage implements OnInit {
         this.restDayofQuarter = this.restDay('quarter');
         this.restDayofYear = this.restDay('year');
       }
-    )
+    );
   }
 
   private restDay(type: moment.unitOfTime.StartOf): number {
