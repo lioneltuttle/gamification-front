@@ -34,8 +34,23 @@ export class UserService {
     ;
   }
 
+  addAdminTag(userId: any) : Observable<any>{
+    return this.apiService.post('admintag', userId)
+    ;
+  }
+
+  removeAdminTag(userId: any) : Observable<any>{
+    return this.apiService.post('usertag', userId)
+    ;
+  }
+
   removeUserRole(userId: any) : Observable<any>{
     return this.apiService.post('removeUserRole', userId)
+    ;
+  }
+
+  consume(userId: any) : Observable<any>{
+    return this.apiService.post('consume', userId)
     ;
   }
 

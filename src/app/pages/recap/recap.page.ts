@@ -123,6 +123,14 @@ export class RecapPage implements OnInit {
     );
   }
 
+  consume(userId) {
+    this.userService.consume(userId).subscribe(
+      data => {
+        this.ngOnInit();
+      }
+    );
+  }
+
   deleteUser(login) {
     this.userService.deleteUser(login).subscribe(
       data => {
