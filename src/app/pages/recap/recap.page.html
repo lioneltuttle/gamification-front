@@ -85,7 +85,7 @@
       <ion-col *ngFor="let col of badges" class="col" >{{col}}</ion-col>
       <ion-col class="col" >Master</ion-col>
       <ion-col class="col" >Legend</ion-col>
-      <ion-col class="col" >cadeau</ion-col>
+      <ion-col class="col" >Cadeau</ion-col>
     </ion-row>
     <ion-row *ngFor="let ligne of tab" >
   
@@ -109,8 +109,8 @@
           {{ displayValueOrZero(ligne.badgesPro, col)   }} badge(s) pro;<br/> {{displayValueOrZero(ligne.points, col)}} points
          <ion-buttons slot="end">
                  <ionic-context-menu icon="ribbon">
-                   <ionic-context-menu-item icon="trending-up" (click)="showPromptAlert(ligne.user.id, col,1)">Add Points</ionic-context-menu-item>
-                   <ionic-context-menu-item icon="trending-down" (click)="showPromptAlert(ligne.user.id, col,-1)">Remove Points</ionic-context-menu-item>
+                   <ionic-context-menu-item icon="trending-up" (click)="showPromptAlert(ligne.user.id, col,1)">Ajouter des Points</ionic-context-menu-item>
+                   <ionic-context-menu-item icon="trending-down" (click)="showPromptAlert(ligne.user.id, col,-1)">Enlever des Points</ionic-context-menu-item>
                  </ionic-context-menu>
                </ion-buttons>
           </ion-toolbar> 
@@ -118,7 +118,17 @@
         </ion-col>
       <ion-col class="col-content" >{{ligne.badgeMaster}}</ion-col>
       <ion-col class="col-content" >{{ligne.badgeLegend}}</ion-col>
-      <ion-col class="col-content" >{{ligne.shouldReceivePresent}}</ion-col>
+      <ion-col class="col-content" >
+        <ion-toolbar> 
+        Déja offerts : {{ligne.consumedPresents}} 
+        <br/><br/>À offrir : {{ligne.pendingPresents}}
+        <ion-buttons slot="end">
+        <ionic-context-menu icon="ribbon">
+          <ionic-context-menu-item icon="trophy" (click)="consume(ligne.user.id)">Cadeau offert!</ionic-context-menu-item>
+        </ionic-context-menu>
+      </ion-buttons>
+      </ion-toolbar> 
+      </ion-col>
     </ion-row>
   </ion-grid>
   </ion-content>

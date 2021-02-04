@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthExpiredInterceptor } from './interceptors/auth-expired.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,6 +39,7 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    OneSignal,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -6,11 +6,13 @@ import { concatMap } from 'rxjs/operators';
 import { BadgesService } from 'src/app/services/badges/badges.service';
 import { AlertController } from '@ionic/angular';
 import { Point } from 'src/app/model/Point';
+import { NotificationService } from 'src/app/services/notifications/notifications.service';
 import { PointsAuditService } from 'src/app/services/points-audit/points-audit.service';
 import { zip, of, from } from 'rxjs';
 import { groupBy, mergeMap, toArray, switchMap } from 'rxjs/operators';
 import { UploadFileService } from 'src/app/services/uploadFile/uploadFile.service';
-
+import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+// import { FCM } from '@ionic-native/fcm';
 
 
 @Component({
@@ -35,7 +37,11 @@ export class RecapPage implements OnInit {
     private badgesService: BadgesService,
     public atrCtrl: AlertController,
     private pointsAuditService: PointsAuditService,
-    private uploadFileService: UploadFileService) { }
+    private uploadFileService: UploadFileService,
+    private notificationService: NotificationService,
+    private push: Push// ,
+    // private fcm: FCM
+  ) { }
 
   ngOnInit() {
     this.badges = Object.keys(BadgeType);
@@ -104,10 +110,21 @@ export class RecapPage implements OnInit {
         this.ngOnInit();
       }
     );
+
+    this.notificationService.sendPushNotification(new Array(userId + ''
+            , 'Admin Role!', 'Rôle d\'administrateur', 'Your role has been modified', 'Rôle d\'administration mis à jour'));
   }
 
   removeUserRole(userId) {
     this.userService.removeUserRole(userId).subscribe(
+      data => {
+        this.ngOnInit();
+      }
+    );
+  }
+
+  consume(userId) {
+    this.userService.consume(userId).subscribe(
       data => {
         this.ngOnInit();
       }
@@ -130,8 +147,11 @@ export class RecapPage implements OnInit {
         this.ngOnInit();
       }
     );
-  }
 
+    this.notificationService.sendPushNotification(new Array(userId + ''
+    , 'Account validated', 'Inscription validée', 'You are now a validated user. You can use the application. Welcome!', 
+    'Votre compte a été validé. Vous pouvez désormais utiliser l\'application. Bienvenue!'));
+  }
 
   async showPromptAlert(userid, badgetype, coef) {
     const alert = this.atrCtrl.create({
@@ -168,14 +188,18 @@ export class RecapPage implements OnInit {
             po.userId = userid;
             po.nbPoints = data.points * coef;
             this.adminPointsService.save(po);
+            this.notificationService.sendPushNotification(new Array(userid + ''
+            , 'Congratulations!', 'Félicitations', 'Points have been updated', 'Solde de points mis à jour'));
             console.log('Points added : ' + data.points);
-            this.addUserRole(userid);
+            this.ngOnInit();
 
           }
         }
       ]
     });
-    (await alert).present();
+    (await alert).present().then((value) => { this.ngOnInit(); });
+    this.ngOnInit();
+
   }
 
   displayValueOrZero(tableau, col) {
