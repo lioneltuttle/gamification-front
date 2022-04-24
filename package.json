@@ -64,7 +64,7 @@
     "http2": "^3.3.7",
     "https": "^1.0.0",
     "ionic-context-menu": "^1.0.3",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "net": "^1.0.2",
     "ng-jhipster": "0.9.3",
     "ngx-webstorage": "2.0.1",
