@@ -59,7 +59,7 @@
     "firebase": "^8.2.0",
     "firebase-admin": "^9.4.2",
     "fs": "0.0.1-security",
-    "generator-jhipster-ionic": "^3.3.0",
+    "generator-jhipster-ionic": "^8.0.0",
     "http": "0.0.1-security",
     "http2": "^3.3.7",
     "https": "^1.0.0",
@@ -129,7 +129,7 @@
     "onesignal-cordova-plugin": "^2.11.2",
     "phonegap-plugin-multidex": "^1.0.0",
     "phonegap-plugin-push": "^2.3.0",
-    "protractor": "5.4.2",
+    "protractor": "5.4.4",
     "ts-loader": "5.3.3",
     "ts-node": "8.0.3",
     "tslint": "~5.16.0"
